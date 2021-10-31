@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('materia', {
-        id_materia: {
+      return queryInterface.createTable('profesor', {
+        dni: {
           allowNull: false,
           autoIncrement: true,
           primaryKey: true,
@@ -11,8 +11,11 @@ module.exports = {
         nombre: {
           type: Sequelize.STRING
         },
-        dni_alumno:{
-          type: Sequelize.INTEGER
+        apellido: {
+          type: Sequelize.STRING
+        },
+        materia: {
+            type: Sequelize.STRING
         },
         createdAt: {
             allowNull: false,
@@ -25,6 +28,6 @@ module.exports = {
       });
     },
     down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('materia');
+      return queryInterface.dropTable('profesor');
     }
   };
