@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('carreras', {
-      id_carrera: {
+    return queryInterface.createTable('carrera', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -10,6 +10,9 @@ module.exports = {
       },
       nombre: {
         type: Sequelize.STRING
+      },
+      id_instituto:{
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

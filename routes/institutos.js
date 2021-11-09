@@ -3,13 +3,12 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
   models.instituto
-    .findAll({
-      attributes: ["id", "nombre"]
-    })
-    .then(institutos => res.send(institutos))
-    .catch(() => res.sendStatus(500));
+  .findAll({
+    attributes: ["id","nombre"]
+  })
+  .then(institutos => res.send(institutos))
+  .catch(() => res.sendStatus(500));
 });
 
 router.post("/", (req, res) => {
@@ -27,18 +26,18 @@ router.post("/", (req, res) => {
     });
 });
 
-const findInstituto = (id, { onSuccess, onNotFound, onError }) => {
+const findinstituto = (id, { onSuccess, onNotFound, onError }) => {
   models.instituto
     .findOne({
-      attributes: ["id", "nombre"],
+      attributes: ["id","nombre"],
       where: { id }
     })
-    .then(instituto => (instituto ? onSuccess(instituto) : onNotFound()))
+    .then(instituto=> (instituto ? onSuccess(instituto) : onNotFound()))
     .catch(() => onError());
 };
 
 router.get("/:id", (req, res) => {
-  findInstituto (req.params.id, {
+  findinstituto (req.params.id, {
     onSuccess: instituto => res.send(instituto),
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
@@ -59,7 +58,7 @@ router.put("/:id", (req, res) => {
           res.sendStatus(500)
         }
       });
-    findInstituto(req.params.id, {
+    findinstituto(req.params.id, {
     onSuccess,
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)
@@ -72,7 +71,7 @@ router.delete("/:id", (req, res) => {
       .destroy()
       .then(() => res.sendStatus(200))
       .catch(() => res.sendStatus(500));
-  findInstituto(req.params.id, {
+  findinstituto(req.params.id, {
     onSuccess,
     onNotFound: () => res.sendStatus(404),
     onError: () => res.sendStatus(500)

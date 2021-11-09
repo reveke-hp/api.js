@@ -3,18 +3,19 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
   models.profesor
-    .findAll({
-      attributes: ["id", "nombre"]
-    })
-    .then(profesores => res.send(profesores))
-    .catch(() => res.sendStatus(500));
+  .findAll({
+    attributes: ["id","nombre","apellido","dni","id_materia"],
+    include:[{as:'Materia-Relacionada', model:models.materia, attributes: ["id","nombre","id_materia"]}]
+  })
+  .then(profesores => res.send(profesores))
+  .catch(error => { return next(error)});
 });
+
 
 router.post("/", (req, res) => {
   models.profesor
-    .create({ nombre: req.body.nombre })
+  .create({ nombre: req.body.nombre,id_materia:req.body.id_materia })
     .then(profesor => res.status(201).send({ id: profesor.id }))
     .catch(error => {
       if (error == "SequelizeUniqueConstraintError: Validation error") {
@@ -30,7 +31,7 @@ router.post("/", (req, res) => {
 const findProfesor = (id, { onSuccess, onNotFound, onError }) => {
   models.profesor
     .findOne({
-      attributes: ["id", "nombre"],
+      attributes: ["id","nombre","apellido","dni","id_materia"],
       where: { id }
     })
     .then(profesor => (profesor ? onSuccess(profesor) : onNotFound()))

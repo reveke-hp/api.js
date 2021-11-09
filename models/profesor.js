@@ -2,10 +2,11 @@
 
 module.exports = (sequelize, DataTypes) => {
   const profesor = sequelize.define('profesor', {
-    dni: DataTypes.STRING,
+    id: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellido: DataTypes.STRING,
-    materia: DataTypes.STRING,
+    dni: DataTypes.INTEGER,
+    id_materia: DataTypes.INTEGER,
   }, {});
 
   profesor.associate = function(models){
@@ -13,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
         as : 'Materia-Relacionada',  
         foreignKey: 'id_materia'     
       })
-      
   }
   
   return profesor;

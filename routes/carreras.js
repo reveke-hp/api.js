@@ -3,18 +3,18 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res) => {
-  console.log("Esto es un mensaje para ver en consola");
   models.carrera
-    .findAll({
-      attributes: ["id", "nombre"]
-    })
-    .then(carreras => res.send(carreras))
-    .catch(() => res.sendStatus(500));
+  .findAll({
+    attributes: ["id","nombre","cod_instituto"],
+    include:[{as:'Instituto-Relacionado', model:models.instituto, attributes: ["id","nombre"]}]
+  })
+  .then(carreras => res.send(carreras))
+  .catch(error => { return next(error)});
 });
 
 router.post("/", (req, res) => {
   models.carrera
-    .create({ nombre: req.body.nombre })
+    .create({ nombre: req.body.nombre, cod_instituto:req.body.cod_instituto })
     .then(carrera => res.status(201).send({ id: carrera.id }))
     .catch(error => {
       if (error == "SequelizeUniqueConstraintError: Validation error") {
