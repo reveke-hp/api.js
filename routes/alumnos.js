@@ -5,11 +5,9 @@ var models = require("../models");
 
 router.get("/", (req, res) => {
   models.alumno
-    .findAll({ offset: 5, limit: 5 })
     .findAll({
       attributes: ["id","nombre","apellido","dni","cod_carrera"],
       include:[{as:'carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
-      offset:2,limit:2
     })
     .then(alumnos => res.send(alumnos))
     .catch(error => { return next(error)});
@@ -90,5 +88,7 @@ router.get("/", async(req,res) => {
   })
   res.send(alumnos)
 })
+
+
 
 module.exports = router;

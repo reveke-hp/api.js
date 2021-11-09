@@ -5,6 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     nombre: DataTypes.STRING,
     capacidad: DataTypes.INTEGER,
   }, {});
-  
+
   return aula;
 };
