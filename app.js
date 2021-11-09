@@ -43,15 +43,14 @@ app.use(function(err, req, res, next) {
 
 
 
-
 app.use(express.json());
 
-app.post('/alum', async(req,res)=>{
+app.post('./routes/alumnos', async(req,res)=>{
   await alumnosRouter.create(req.body)
   res.send("success")
 })
 
-router.get("/", async(req,res) => {
+router.get('./routes/alumnos', async(req,res) => {
   const pageAsNumber = Number.parseInt(req.query.page);
   const sizeAsNumber = Number.parseInt(req.query.size);
   const {page,size} = req.querry;
@@ -78,13 +77,13 @@ router.get("/", async(req,res) => {
 })
 
 
-app.get('/alum/:id',async(req,res)=>{
+app.get('./routes/alumnos',async(req,res)=>{
   const id = req.params.id;
   const alumno = await alumnosRouter.findOne({where:{id: id}});
   res.send(alumno)
 })
 
-app.put('/alum/:id', async(req,res)=>{
+app.put('./routes/alumnos', async(req,res)=>{
   const id = req.params.id;
   const alumno = await alumnosRouter.findOne({where:{id: id}});
   alumno.dni = req.body.dni
@@ -92,10 +91,11 @@ app.put('/alum/:id', async(req,res)=>{
   res.send('updated')
 })
 
-app.delete('/alum/:id', async(req, res)=>{
+app.delete('./routes/alumnos', async(req, res)=>{
   const id = req.params.id;
   await alumnosRouter.destroy({where:{id: id}});
   res.send("removed")
 })
 
 module.exports = app;
+
