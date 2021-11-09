@@ -80,15 +80,5 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-router.get("/", async(req,res) => {
-  const {page,size} = req.querry;
-  const alumnos = await models.alumno.findAndCountAll({
-    limit:5,
-    offset:5
-  })
-  res.send(alumnos)
-})
-
-
 
 module.exports = router;
