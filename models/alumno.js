@@ -1,6 +1,4 @@
 'use strict';
-const { Op } = require("sequelize");
-
 
 module.exports = (sequelize, DataTypes) => {
   const alumno = sequelize.define('alumno', {

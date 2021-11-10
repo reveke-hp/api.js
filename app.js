@@ -41,8 +41,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-
 app.use(express.json());
 
 app.post('./routes/alumnos', async(req,res)=>{
@@ -58,7 +56,6 @@ router.get('./routes/alumnos', async(req,res) => {
   let page = 0;
   if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
     page = pageAsNumber;
-
   }
 
   let size = 10;
@@ -97,5 +94,4 @@ app.delete('./routes/alumnos', async(req, res)=>{
   res.send("removed")
 })
 
-module.exports = app;
-
+module.exports = app; 
