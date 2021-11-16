@@ -2,8 +2,9 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "api_v2.0",
+    "database": "api_v2",
     "host": "localhost",
-    "dialect": "mariadb"
+    "dialect": "mariadb",
+    "operatorsAliases": false
   }
 }
